@@ -1,3 +1,4 @@
+import json
 import datetime
 
 class Note:
@@ -12,4 +13,20 @@ class Note:
     
     def __str__(self):
         return f"Created: {self.creation_date}, Modified: {self.modification_date}, Body: {self.body}"
-    
+
+
+class NoteFileStorage:
+    def __init__(self, file_path):
+        self.file_path = file_path
+
+    def load_notes(self):
+        try:
+            with open(self.file_path, 'r') as file:
+                notes_data = json.load(file)
+                return notes_data
+        except FileNotFoundError:
+            return []
+
+    def save_notes(self, notes_data):
+        with open(self.file_path, 'w') as file:
+            json.dump(notes_data, file)
