@@ -18,3 +18,4 @@ product perspective / functions  / constraints / use cases
 all the possible requirements = body of the document
 ## Useful phrases:
 identify / limit options, content, structure, product, external interfaces
+
