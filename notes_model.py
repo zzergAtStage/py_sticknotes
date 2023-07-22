@@ -2,31 +2,20 @@ import json
 import datetime
 
 class Note:
+    """Describes the Note properties and default note behavior"""
     def __init__(self, body):
+        """Default constructor of the class instances"""
         self.creation_date = datetime.datetime.now()
         self.modification_date = self.creation_date
-        self.body = body[:2000] #Предельный размер заметки
+        self.body = body[:2000] #Maximal size of the note
     
     def modify(self, new_body):
+        """Provide the note bode modification. Fixes the date&time of modification"""
         self.body = new_body[:2000]
         self.modification_date = datetime.datetime.now()
     
     def __str__(self):
+        """prints note as string with captions"""
         return f"Created: {self.creation_date}, Modified: {self.modification_date}, Body: {self.body}"
 
 
-class NoteFileStorage:
-    def __init__(self, file_path):
-        self.file_path = file_path
-
-    def load_notes(self):
-        try:
-            with open(self.file_path, 'r') as file:
-                notes_data = json.load(file)
-                return notes_data
-        except FileNotFoundError:
-            return []
-
-    def save_notes(self, notes_data):
-        with open(self.file_path, 'w') as file:
-            json.dump(notes_data, file)
